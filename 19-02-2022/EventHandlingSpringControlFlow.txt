@@ -1,0 +1,16 @@
+Spring Project
+		-> Java Based Configuration
+		
+		CustomEvent
+		
+		
+		A spring specific interface for firing application events
+			-> CustomEventPublisher -> ApplicationEventPublisher -> publish/informScoreToUser
+			
+		The Runtime starting point, should be called from the client code	
+			-> ApplicationEventPublisher -> informScoreToUser()
+			
+		a method for event listener will be receiving the message
+			onApplicationEvent -> event -> print the message
+		
+	
