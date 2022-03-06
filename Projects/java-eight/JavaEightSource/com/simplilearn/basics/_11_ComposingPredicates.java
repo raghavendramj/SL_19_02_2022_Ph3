@@ -22,7 +22,6 @@ public class _11_ComposingPredicates {
 		for(String eachFruit : fruits) {
 			System.out.println("isLengthGrt5AndContainsO : "+eachFruit+" ? "+ isLengthGrt5AndContainsO.test(eachFruit));
 		}
-
 	}
 
 }

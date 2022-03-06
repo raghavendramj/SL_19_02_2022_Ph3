@@ -16,11 +16,10 @@ public class _09_CompisingFunctions {
 
 		List<String> names = Arrays.asList("virat", "rishabh", "jadeja");
 		String output = capitalizeString.andThen(mappedStrings).apply("virat");
-		//System.out.println("output : " + output);
+		System.out.println("output : " + output);
 		
 		for(String eachName : names) {
 			System.out.println(capitalizeString.andThen(mappedStrings).apply(eachName));
 		}
 	}
-
 }
