@@ -1,0 +1,16 @@
+Swagger
+---------
+
+FontEnd -> Angular
+	-> Services
+			-> backCall -> http://localhost:8083/employees/  ->  [{ "firstName" : "Raghavendra", "lastName":"M J", "email":"raghav@gmail.com" }] -> Show
+
+BackEnd
+	Endpoints
+		->  http://localhost:8083/employees/ -> [{ "firstName" : "Raghavendra", "lastName":"M J", "email":"raghav@gmail.com" }]
+		-> http://localhost:8083/employees/2 -> { "id":1 , "firstName" : "Raghavendra", "lastName":"M J", "email":"raghav@gmail.com" }
+
+http://localhost:8183/students
+http://localhost:8183/students/country/USA
+http://localhost:8183/students/class/III
+http://localhost:8183/students/name/Lokesh

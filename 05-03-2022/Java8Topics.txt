@@ -1,0 +1,41 @@
+Java 8
+	Basics
+		_00_AnonymousClass
+		_01_FunctionalInterfaces
+		_02_AnonymousInnerClasses
+		_03_LamdaExpression
+		_04_VariableCapture
+		 _05_MethodReference
+			-> Linked a abstract method of a functional interface to 
+				1. Instance method of my class -> 
+					without params -> Printer printerObj = new _02_MethodReferenceInstanceMethod()::display;
+					with params -> ArithmeticCalculator calculator = new _02_MethodReferenceInstanceMethod()::difference;
+				2. Static method of my class -> 
+					without params -> Printer printerObj = MethodReferenceInstanceMethod::display;
+					with params -> ArithmeticCalculator calculator = MethodReferenceInstanceMethod::difference;
+				3. Constructor  of my class -> 
+					  IMessage welcome = Message::new; 		 
+		_06_ConsumerInterface
+		_07_ChainingConsumers
+		_08_SupplierInterface
+		_09_FunctionInterface
+		_10_ComposingFunctions
+		_11_PredicateInterface
+		_12_ComposingPredicates
+		_13_BinaryOperator
+		_14_UnaryOperator
+Streams
+	_01_ImperativeVsDeclarative
+	_02_CreateStreams
+	 _03_MappingElements
+	 _04_FilteringElements
+	 _05_SlicingStreams
+	 _06_SortingStreams
+	 _07_UniqueValues
+	 _08_PeekingElements
+	 _09_Reducers
+	 _10_ReducingStream
+	 _11_Collectors
+	 _12_GroupingElements
+	 _13_PartitioningElements
+	_14_PrimitiveTypeStreams

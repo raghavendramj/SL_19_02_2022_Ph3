@@ -1,0 +1,95 @@
+Spring Boot + AOP
+
+Controller
+Service
+Repository
+Data
+
+Steps to create Spring Boot Project :-
+
+Creating Spring Boot Project :- https://start.spring.io/
+	Dependencies Selected :-
+		spring-web -> RestFul API's and Spring MVC implementations.
+		spring-boot-starter-data-jpa -> Database (MySQL) Operations
+		mysql-connector-java -> Driver for MySQL
+		lombok -> for reducing boilerplate code.
+
+
+Layer
+	-> Data Layer
+		@Entity
+			Product
+				-> id(PK, Long), name, price, quantity, desc
+			
+		@Repository
+			ProductRepository -> extends JpaRepository
+			-> Default :- findById, findAll, save, delete, update
+			-> findProductByName(String name);
+			-> findProductByPrice(long price);
+			
+		@Service
+			ProductService 
+			C + R + U + D
+			//Create
+			Product createProduct(Product product); //-> save()
+			
+			//Read
+			List<Product> getProducts(); // findAll()
+			Product getProduct(Long id);
+			List<Product> getProductsByName(String name);
+			List<Product> getProductsByPrice(long price);
+			
+			//Update
+			Product updateProduct(Long id, Product product);
+			
+			//Delete
+			Product deleteProduct(Long id);
+	
+Controller Layer :- 	
+		@RestController
+		@RequestMapping("/products")
+		
+		@PostMapping
+		Product addProduct(@RequestBody Product product);		
+		
+		@GetMapping
+		List<Product> getProducts() 
+		URL :- http://localhost:8086/products
+		Response :- [ { "id": 1, "name": "OnePlus 10 Pro", "price": 69000, "quantity": 1 }]
+		
+		@GetMapping("/{id}")
+		Product getProduct(@PathVariable("id") Long id) 
+		URL :- http://localhost:8086/products/1
+		Response :- { "id": 1, "name": "OnePlus 10 Pro", "price": 69000, "quantity": 1 }
+		
+		@GetMapping("/name")
+		List<Product> getProductsByName(@RequestParam("productName") String productName)
+		http://localhost:8086/products/name?productName=SongBraviaA90
+		Response :- [ { "id": 4, "name": "SongBraviaA90", "price": 350000, "quantity": 2 } ]
+		
+		@GetMapping("/price")
+		List<Product> getProductsByPrice(@RequestParam("productPrice") Long productPrice)
+		URL :- http://localhost:8086/products/price?productPrice=96000
+		Response :- [ { "id": 3, "name": "Samsung S22 Ultra", "price": 96000, "quantity": 2 } ]
+		
+		@PutMapping("/{id}")
+		Product udpateProduct(@PathVariable("id") Long id, @RequestBody Product product)
+		
+		@DeleteMapping("/{id}")
+		Product deleteProduct(@PathVariable("id") Long id)
+		
+		
+		Create the table in the backend for us.
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+			
+		

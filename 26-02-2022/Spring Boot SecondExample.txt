@@ -1,0 +1,107 @@
+Spring Boot Project
+
+Steps to create Spring Boot Project :-
+
+Creating Spring Boot Project :- https://start.spring.io/
+	Dependencies Selected :-
+		spring-web -> RestFul API's and Spring MVC implementations.
+		spring-boot-starter-data-jpa -> Database (MySQL) Operations
+		mysql-connector-java -> Driver for MySQL
+		lombok -> for reducing boilerplate code.
+
+	Data Layer
+		@Entity
+		-> Employee
+				id, firstName, lastName, email, Address
+		-> Address
+				id, name, state
+		@OneToMany
+		Employee 1 : N Address
+
+	@Repository
+		EmployeeRepository extends JpaRepository
+			findByName(String firstName, String lastName);
+		AddressRespository extends JpaRepository
+
+	Service Layer
+
+	@Service
+	EmployeeService
+		C + R + U + D
+		//Create
+		Employee createEmployee(Employee employee);
+		
+		//Read
+		List<Employee> getAllEmployees();
+		Employee getEmployee(Long id);
+		Employee getEmployee(String firstName, String lastName);
+		
+		//Update
+		void updateEmployee(Long id, Employee employee);
+		
+		//Delete
+		void deleteEmployee(Long id);
+		
+	AddressService
+		C + R + U + D
+		//Create
+		Address createAddress(Address address);
+		
+		//Read
+		List<Address> getAllAddress();
+		Address getAddress(Long id);
+		Address getAddress(String cityName);
+		
+		//Update
+		void updateAddress(Long id, Address address);
+		
+		//Delete
+		void deleteAddress(Long id);
+		
+	Controller
+	Difference between RestController(Spring Boot) & Controller(Spring MVC)?
+	
+	@RestController	
+	
+	DB Command :- insert into employee(firstName, lastName, email);
+	Create -> @RequestMapping(value = "/employees", method = RequestMethod.POST)
+	Create -> @PostMapping("/employees")
+	1st Way -> 	Employee addEmployee(@RequestBody Employee employee)
+	2nd Way -> ResponseEntiry<Employee> addEmployee(@RequestBody Employee employee)
+	URL :- http://localhost:8086/employees
+	Request Body -> {'firstName': 'Raghav', 'lastName':'MJ', 'email' :- 'raghav@gmail.com'}
+	
+	DB Command :- select * from employee;
+	Read -> @RequestMapping(value = "/employees", method = RequestMethod.GET)
+	Read -> @GetMapping("/employees")
+	List<Employee> addEmployee()
+	URL :- http://localhost:8086/employees
+	
+	DB Command :- select * from employee where id =?; 
+	Read -> @GetMapping("/employees/{id}")
+	Employee getEmployee(@PathVariable("id") Long id)
+	URL :- http://localhost:8086/employees/1
+	
+	DB Command :- select * from employee where firstName =? and lastName =?; 
+	Read -> @GetMapping("/employees/name")
+	Employee getEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName)
+	URL :- http://localhost:8086/employees?firstName=raghav&lastName=mj
+	
+	Update -> @PutMapping("/employees/{id}")
+	void udpateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee)
+	URL :- http://localhost:8086/employees/1
+	Request Body -> {'firstName': 'Raghavendra', 'lastName':'MJ', 'email' :- 'raghavendra.mj@gmail.com'}	
+	
+	Delete -> @DeleteMapping("/employees/{id}")
+	void deleteEmployee(@PathVariable("id") Long id)
+	URL :- http://localhost:8086/employees/1 
+	
+	
+	
+	
+	
+	
+
+	
+
+

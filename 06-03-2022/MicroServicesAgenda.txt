@@ -1,0 +1,27 @@
+Spring Boot Projects
+	-> Vaccination Center -> Spring Boot + JPA + MySQL
+	-> Citizen -> Spring Boot + JPA + MySQL
+
+Vaccination Center -> Spring Boot + JPA + MySQL
+	VaccinationCenter
+		id, name, address
+
+
+Citizen -> Spring Boot + JPA + MySQL
+	Citizen
+		id, name, age, email, vaccinationCenterId
+
+
+	CitizenService
+		All Citizens 									:-  http://localhost:8086/citizens 				-> List<Citizen>
+		Specific Citizen 							:-  http://localhost:8086/citizens/1 			-> Citizen
+		Citizen belonging to one center 	:-	http://localhost:8086/citizens/center/1 	-> List<Citizen>
+
+	VaccinationCenterService
+		All Vaccination Centers 				:- http://localhost:8087/vaccinationcenter/				-> List<VaccinationCenter>
+		Specific Vaccination Center			:- http://localhost:8087/vaccinationcenter/1				-> VaccinationCenter
+	Communication from VaccinationCenterService to CitizenService
+		Citizen belonging to one center 	:- http://localhost:8087/vaccinationcenter/citizens/2 	-> VaccinationCenter + List<Citizen>(http://localhost:8086/citizens/center/1)
+
+
+

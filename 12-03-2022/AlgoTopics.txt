@@ -1,0 +1,48 @@
+Interview Questions :-
+	DS and Algo
+		200-300 Easy Questions
+		100-150 Medium Questions
+		50+ Hard Questions
+
+	MAANG -> Meta(Facebook) Amazon Apple Netflix Google
+
+	Topics:-
+	-----------------------------
+		Bit Manipulation
+		Array
+		Matrix
+		String
+		Searching & Sorting
+		LinkedList
+		Stacks & Queues
+	-----------------------------
+		Recursion
+	-----------------------------
+		Binary Trees
+		Binary Search Trees
+		Dynamic Programming
+		Heap
+		-----------------------------
+		Top 10 Companies
+		----------------------------
+		Greedy
+		BackTracking
+		Graph
+		Trie
+	----------------------------- 
+
+	Round 1 and 2 or 3
+	-----------------------------
+
+	Round 3 or 4 (Service and Product)
+	---------------
+	Core Java
+	Java 8 -> 
+	----------------------
+	Advanced ->Frameworks
+		-> Spring Basics
+		-> Spring Boot Basics
+		-> Spring MVC
+		-> Spring Security
+
+

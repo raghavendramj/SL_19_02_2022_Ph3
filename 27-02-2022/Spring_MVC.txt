@@ -1,0 +1,59 @@
+Spring MVC
+
+@Entity
+Student
+	-> id, name, address
+
+StudentService
+	-> C R U D
+	-> saveStudent(); //CREATE
+	-> getStudents(); //READ
+	-> getStudent(); //READ
+	-> updateStudent();  //UPDATE
+	-> deleteStudent(); //DELETE
+
+Spring MVC WorkFlow
+------------------------
+ Spring MVC -> Model View and Controller
+
+ URL :- http://localhost:8183/spring-mvc/start
+
+1. Incoming HTTP Request -> Handler Mapping
+	web.xml
+	<url-pattern>/</url-pattern>
+		-> servlet-mapping -> servlet-name -> dispatcher
+		-> servlet -> servlet-name  -> dispatcher ->  (servlet-class -> org.springframework.web.servlet.DispatcherServlet)
+			-> contextConfigLocation -> /WEB-INF/spring-servlet.xml (component-scan, sessionFactory, annotatedClass, hibernateProperties)
+
+	Dispatcher Servlet / Front Controller responsibilities are...
+		1. View Resolver -> /WEB-INF/views/ + "Response from controller" + ".jsp" => ex. /WEB-INF/views/home.jsp
+		2. component-scan -> <context:component-scan base-package="com.great.learning" />
+		3. dataSource -> driver, url, username, password
+		4. sessionFactory ->
+			dataSource,
+			annotatedClasses,
+			hibernateProperties -> dialect, showsql, format_sql, ddl
+		5. myTransactionManager -> sessionFactory
+
+	1. Handler Mapping
+		SpringMVCController -> /start -> (model) + "view-spring"
+		does 2 things
+			1. Sets the model -> message
+			2. Return the view name to the UI
+
+	2. View Resolver
+		prefix -> /WEB-INF/views/
+		suffix -> .jsp
+
+		prefix + response from handler method + suffix
+		Example :- /WEB-INF/views/  + view-spring + .jsp =>  /WEB-INF/views/view-spring.jsp
+
+		return  /WEB-INF/views/view-spring.jsp
+		
+	3. Response sent to UI
+		-> view-spring.jsp
+			-> model-> message(set in handler method) will now be rendered in the UI
+
+
+
+

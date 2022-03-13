@@ -1,0 +1,123 @@
+Spring Security
+-----------------
+
+Spring Boot
+Spring Data JPA
+Spring Security
+
+Step1:
+	Creating Spring Boot Project :- https://start.spring.io/
+	Dependencies Selected :-
+		spring-web -> RestFul API's and Spring MVC implementations.
+		spring-boot-starter-data-jpa -> Database (MySQL) Opeartions
+		spring-boot-starter-security -> for authentication and authorization
+		mysql-connector-java -> Driver for MySQL
+
+Layers:
+	Data Access Layer
+	--------------------
+		@Entity
+		Employee
+			id, firstName, lastName, email
+
+		@Repository (JPA)
+		EmployeeRepository extends JpaRepository<Employee, Long>
+		By default => findById, findAll, save, deleteById, delete
+		Employee findByEmail(String email);
+
+	Service Layer
+	---------------
+	@Service
+	EmployeeService(I)
+		C + R  + U + D
+		C -> Employee createEmployee(Employee employee);
+		R -> List<Employee> getEmployees();
+		R -> Employee getEmployee(Long id);
+		R -> Employee getEmployee(String email);
+		U -> void updateEmployee(Long id, Employee employee);
+		D -> void deleteEmployee(Long id);
+
+	Controller Layer
+	------------------
+	@RestController
+	@RequestMapping("/employees")
+	EmployeeController
+
+		//CREATE
+		@PostMapping
+		Employee saveEmployee(@RequestBody Employee employee)
+		URL :- http://localhost:8083/employees + { "firstName" : "Raghav", "lastName":"MJ", "email":"raghav@gmail.com" }
+
+		//READ
+		@GetMapping
+		List<Employee> getEmployees();
+		URL:- http://localhost:8083/employees/
+
+		@GetMapping("/{id}")
+		Employee getEmployeeById(@PathVariable("id") Long id)
+		URL:- http://localhost:8083/employees/2
+
+		@GetMapping("/search")
+		Employee getEmployeeById(@RequesrParam("email") String email)
+		URL:- http://localhost:8083/search?email=raghav@gmail.com
+
+		@PutMapping("/{id}")
+		void updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee)
+		URL :- http://localhost:8083/employees/1 + { "firstName" : "Raghavendra", "lastName":"M J", "email":"raghav@gmail.com" }
+
+		@DeleteMapping("/{id}")
+		void deleteEmployee(@PathVariable("id"))
+		URL :- http://localhost:8083/employees/1
+
+
+		Spring Security
+			-> 1. spring-boot-starter-security -> redirected my access to a login page with default user:- user generated password (printed in console)
+					default username :- user
+					default username :- Example(printed in console-> Using generated security password: f9947dff-7465-4a32-a005-7d1d84751f20)
+			-> 2. added the following configs in the application.properties
+					spring.security.user.name=raghav
+					spring.security.user.password=raghav@123
+			-> 3. UserServiceImpl
+					-> spring-security's User object to have some hardcoded username and password -> admin, admin@123
+					-> NoOpPasswordEncoder
+			-> 4. Database authentication
+					-> From database.
+					-> BCryptedPasswordEncoder
+			-> 5. Role Based Authentication
+					-> /employees -> Role : Admin
+					-> /employees -> Role : User
+
+			https://bcrypt-generator.com/ -> BCrypted Password Generator
+			Ex: 1234 -> $2a$12$LTv.D23l637wjIgd1RbbPu6.Js6eLaGhDMBTONUBtKO0AreNTugLG -> 1234
+			Ex: 123456 -> $2a$12$I1.eCwEzn67I9Qw6DM10GOV45HH.VV6kFHBLG7E5Pu9YhIROvLJoe
+
+			Database :-
+			User
+				insert into user(username, password) values ('nikesh', '$2a$12$LTv.D23l637wjIgd1RbbPu6.Js6eLaGhDMBTONUBtKO0AreNTugLG');
+				insert into user(username, password) values ('shyam', '$2a$12$I1.eCwEzn67I9Qw6DM10GOV45HH.VV6kFHBLG7E5Pu9YhIROvLJoe');
+
+			Role
+				insert into role(name) values('USER');
+				insert into role(name) values('ADMIN');
+				
+			user_roles
+				insert into user_roles values(1, 1);
+				insert into user_roles values(2, 2);
+				
+				
+			Query :
+			select u.username, r.name
+			from  user u 
+			inner join user_roles ur on ur.user_id=u.user_id
+			inner join role r on r.role_id = ur.role_id;
+
+
+		| username | name  |
+		+----------+-------+
+		| nikesh   | USER  |  -> /employees
+		| shyam    | ADMIN | -> /employees/email/*
+		
+		http://localhost:8083/employees/search?email=raghav@gmail.com -> type=Forbidden, status=403
+
+
+
